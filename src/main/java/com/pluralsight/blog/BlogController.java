@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -25,6 +26,13 @@ public class BlogController {
         modelMap.put("title", "Blog Post 1");
         modelMap.put("posts", posts );
         return "home";
+    }
+
+    @RequestMapping("/post/{id}")
+    public String postDetails(@PathVariable Long id, ModelMap modelMap){
+        Post post = postRepository.findById(id);
+        modelMap.put("post", post);
+        return "post-details";
     }
 
 
